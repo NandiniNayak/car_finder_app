@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  price: 1.5
+  fuel_type: 1.5
+  make: 2021-07-06
+  car_type: MyString
+  picture: MyString
+  buyer_id: 1
+  seller_id: 1
+  profile: one
+
+two:
+  title: MyString
+  description: MyText
+  price: 1.5
+  fuel_type: 1.5
+  make: 2021-07-06
+  car_type: MyString
+  picture: MyString
+  buyer_id: 1
+  seller_id: 1
+  profile: two
