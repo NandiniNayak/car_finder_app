@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<% @listing.pictures.each do |picture| %>
+  <%= image_tag picture %>
+<% end %>
+
 <p>
   <strong>Title:</strong>
   <%= @listing.title %>
@@ -28,11 +32,6 @@
 <p>
   <strong>Car type:</strong>
   <%= @listing.car_type %>
-</p>
-
-<p>
-  <strong>Picture:</strong>
-  <%= @listing.picture %>
 </p>
 
 <p>
