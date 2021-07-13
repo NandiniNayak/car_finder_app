@@ -22,10 +22,12 @@ class ProfilesController < ApplicationController
   # POST /profiles or /profiles.json
   def create
     @profile = Profile.new(profile_params)
+    # update foreign key on the back end
+    @profile.user_id = current_user.id
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: "Profile was successfully created." }
+        format.html { redirect_to new_listing_path, notice: "Profile was successfully created." }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new, status: :unprocessable_entity }

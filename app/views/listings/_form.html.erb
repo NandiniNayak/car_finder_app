@@ -10,10 +10,7 @@
     <%= f.input :fuel_type %>
     <%= f.input :make %>
     <%= f.input :car_type %>
-    <%= f.input :picture %>
-    <%= f.input :buyer_id %>
-    <%= f.input :seller_id %>
-    <%= f.association :profile %>
+    <%= f.file_field :pictures, multiple: true %>
   </div>
 
   <div class="form-actions">

@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy ]
+  # before_action :authenticate_user!
 
   # GET /listings or /listings.json
   def index
@@ -12,7 +13,18 @@ class ListingsController < ApplicationController
 
   # GET /listings/new
   def new
-    @listing = Listing.new
+    # if the user is not logged in redirect to the login page
+    # else redirect to the cars form page
+    if user_signed_in?
+        # if user has created a profile show the car form else redirect to creating a profile page
+        if current_user.profile
+            @listing = Listing.new
+        else
+          redirect_to new_profile_path
+        end
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /listings/1/edit
@@ -22,6 +34,8 @@ class ListingsController < ApplicationController
   # POST /listings or /listings.json
   def create
     @listing = Listing.new(listing_params)
+    # associate the car listed to a seller
+    @listing.seller_id = current_user.profile.id
 
     respond_to do |format|
       if @listing.save
@@ -64,6 +78,6 @@ class ListingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def listing_params
-      params.require(:listing).permit(:title, :description, :price, :fuel_type, :make, :car_type, :picture, :buyer_id, :seller_id, :profile_id)
+      params.require(:listing).permit(:title, :description, :price, :fuel_type, :make, :car_type, :buyer_id, :seller_id, :profile_id, pictures: [])
     end
 end
