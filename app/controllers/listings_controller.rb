@@ -9,6 +9,11 @@ class ListingsController < ApplicationController
 
   # GET /listings/1 or /listings/1.json
   def show
+    if params[:checkout] == "success"
+      # update buyer 
+      @listing.buyer_id = current_user.profile.id
+      @listing.save
+    end
   end
 
   # GET /listings/new
