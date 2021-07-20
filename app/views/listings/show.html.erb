@@ -49,5 +49,19 @@
   <%= @listing.profile_id %>
 </p>
 
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
+|
+
+<%# if the car listed is by the seller who is logged in show the edit button %>
+<% if(current_user && current_user.profile && (current_user.profile.id == @listing.seller.id)) %>
+    <%= link_to 'Edit', edit_listing_path(@listing) %> 
+<% else %>
+  <%# if the car has a buyer then provide sold button else show a buy button %>
+  <% if @listing.buyer %>
+      <button class="btn btn-danger">Sold </button>
+  <% else %>
+      <% if current_user && current_user.profile %>
+        <%= link_to 'buy', payment_path(listing_id: @listing.id), method: :post, class: "btn btn-primary"%>
+      <% end %>
+  <% end %>
+<% end %>
 <%= link_to 'Back', listings_path %>
